@@ -154,7 +154,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     child: TextButton(
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/home-screen');
+                        Navigator.pushReplacementNamed(context, '/main-screen');
                       },
                       child: Text(
                         'Get Started',
