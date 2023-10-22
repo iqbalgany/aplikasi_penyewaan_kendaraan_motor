@@ -1,3 +1,4 @@
+import 'package:aplikasi_penyewaan_motor/views/screens/home_screen.dart';
 import 'package:aplikasi_penyewaan_motor/views/screens/login_screen.dart';
 import 'package:aplikasi_penyewaan_motor/views/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/splash-screen': (context) => SplashScreen(),
         '/login-screen': (context) => LoginScreen(),
+        '/home-screen': (context) => HomeScreen(),
       },
       home: SplashScreen(),
     );
