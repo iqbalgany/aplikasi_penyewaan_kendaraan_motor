@@ -29,8 +29,9 @@ class _MainScreenState extends State<MainScreen> {
             currentPageIndex = value;
           });
         },
+        iconSize: 35,
         selectedItemColor: kBlueColor,
-        unselectedItemColor: kGreyColor,
+        unselectedItemColor: kBlackColor,
         backgroundColor: kWhiteColor,
         items: [
           BottomNavigationBarItem(
