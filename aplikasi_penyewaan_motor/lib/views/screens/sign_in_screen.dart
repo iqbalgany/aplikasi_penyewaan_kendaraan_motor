@@ -1,13 +1,50 @@
+import 'package:aplikasi_penyewaan_motor/providers/sign_in_provider.dart';
+import 'package:aplikasi_penyewaan_motor/utils/finite_state.dart';
 import 'package:aplikasi_penyewaan_motor/utils/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  @override
+  void initState() {
+    final provider = Provider.of<SignInProvider>(context, listen: false);
+    provider.addListener(() {
+      if (provider.myState == MyState.failed) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Users Doesn\'t exist!',
+            ),
+          ),
+        );
+      } else if (provider.myState == MyState.loaded) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Logged In',
+            ),
+          ),
+        );
+        Navigator.pushReplacementNamed(context, '/main-screen');
+      }
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    GlobalKey formKey = GlobalKey<FormState>();
-    TextEditingController fullNameController = TextEditingController();
+    final provider = Provider.of<SignInProvider>(context, listen: false);
     return Scaffold(
       body: ListView(
         padding: EdgeInsets.symmetric(
@@ -20,7 +57,7 @@ class LoginScreen extends StatelessWidget {
               top: 50,
             ),
             child: Text(
-              'Login',
+              'SignIn',
               style: blackTextStyle.copyWith(
                 fontSize: 24,
                 fontWeight: semiBold,
@@ -73,6 +110,13 @@ class LoginScreen extends StatelessWidget {
                               borderSide: BorderSide(color: kBlueColor),
                             ),
                           ),
+                          validator: (String? value) {
+                            if (value!.isEmpty) {
+                              return 'Please, fill full name field!';
+                            } else {
+                              return null;
+                            }
+                          },
                         ),
                       ],
                     ),
@@ -91,7 +135,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         TextFormField(
-                          controller: fullNameController,
+                          controller: emailController,
                           cursorColor: kBlueColor,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
@@ -106,6 +150,14 @@ class LoginScreen extends StatelessWidget {
                               borderSide: BorderSide(color: kBlueColor),
                             ),
                           ),
+                          validator: (String? value) {
+                            final emailRegExp =
+                                RegExp(r'\b[\w\.-]+@[\w\.-]+\.\w+\b');
+
+                            return !emailRegExp.hasMatch(value!)
+                                ? 'Please, input valid email'
+                                : null;
+                          },
                         ),
                       ],
                     ),
@@ -124,7 +176,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         TextFormField(
-                          controller: fullNameController,
+                          controller: passwordController,
                           cursorColor: kBlueColor,
                           obscureText: true,
                           decoration: InputDecoration(
@@ -139,6 +191,13 @@ class LoginScreen extends StatelessWidget {
                               borderSide: BorderSide(color: kBlueColor),
                             ),
                           ),
+                          validator: (String? value) {
+                            if (value!.isEmpty) {
+                              return 'Please, fill full name field!';
+                            } else {
+                              return null;
+                            }
+                          },
                         ),
                       ],
                     ),
@@ -153,15 +212,31 @@ class LoginScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(defaultRadius),
                     ),
                     child: TextButton(
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/main-screen');
+                      onPressed: () async {
+                        if (formKey.currentState!.validate()) {
+                          formKey.currentState!.save();
+
+                          await provider.signIn(
+                              email: emailController.text,
+                              password: passwordController.text);
+                        }
                       },
-                      child: Text(
-                        'Get Started',
-                        style: whiteTextStyle.copyWith(
-                          fontSize: 18,
-                          fontWeight: medium,
-                        ),
+                      child: Consumer<SignInProvider>(
+                        builder:
+                            (context, provider, circularProgressIndicator) {
+                          if (provider.myState == MyState.loading) {
+                            return circularProgressIndicator!;
+                          } else {
+                            return Text(
+                              'Get Started',
+                              style: whiteTextStyle.copyWith(
+                                fontSize: 18,
+                                fontWeight: medium,
+                              ),
+                            );
+                          }
+                        },
+                        child: CircularProgressIndicator(),
                       ),
                     ),
                   ),

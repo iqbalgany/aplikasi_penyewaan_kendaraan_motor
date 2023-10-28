@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
       Duration(seconds: 3),
       () {
-        Navigator.pushReplacementNamed(context, '/login-screen');
+        Navigator.pushReplacementNamed(context, '/sign-in-screen');
       },
     );
     super.initState();
