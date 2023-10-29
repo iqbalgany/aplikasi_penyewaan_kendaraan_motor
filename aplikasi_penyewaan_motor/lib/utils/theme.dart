@@ -19,6 +19,9 @@ Color kTransparentColor = Colors.transparent;
 TextStyle blackTextStyle = GoogleFonts.poppins(
   color: kBlackColor,
 );
+TextStyle blueTextStyle = GoogleFonts.poppins(
+  color: kBlueColor,
+);
 TextStyle whiteTextStyle = GoogleFonts.poppins(
   color: kWhiteColor,
 );

@@ -1,3 +1,4 @@
+import 'package:aplikasi_penyewaan_motor/providers/home_provider.dart';
 import 'package:aplikasi_penyewaan_motor/providers/sign_in_provider.dart';
 import 'package:aplikasi_penyewaan_motor/views/screens/sign_in_screen.dart';
 import 'package:aplikasi_penyewaan_motor/views/screens/main_screen.dart';
@@ -18,6 +19,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => SignInProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => HomeProvider(),
         )
       ],
       child: MaterialApp(

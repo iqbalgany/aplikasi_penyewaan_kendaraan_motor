@@ -12,10 +12,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  TextEditingController fullNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
   @override
   void initState() {
     final provider = Provider.of<SignInProvider>(context, listen: false);
@@ -79,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
               border: Border.all(color: kBlackColor),
             ),
             child: Form(
-              key: formKey,
+              key: provider.formKey,
               child: Column(
                 children: [
                   /// Full Name Input
@@ -95,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         TextFormField(
-                          controller: fullNameController,
+                          controller: provider.fullNameController,
                           cursorColor: kBlueColor,
                           keyboardType: TextInputType.name,
                           decoration: InputDecoration(
@@ -135,8 +131,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         TextFormField(
-                          controller: emailController,
+                          controller: provider.emailController,
                           cursorColor: kBlueColor,
+                          autocorrect: false,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             hintText: 'Your email address',
@@ -176,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         TextFormField(
-                          controller: passwordController,
+                          controller: provider.passwordController,
                           cursorColor: kBlueColor,
                           obscureText: true,
                           decoration: InputDecoration(
@@ -213,12 +210,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     child: TextButton(
                       onPressed: () async {
-                        if (formKey.currentState!.validate()) {
-                          formKey.currentState!.save();
+                        if (provider.formKey.currentState!.validate()) {
+                          provider.formKey.currentState!.save();
 
                           await provider.signIn(
-                              email: emailController.text,
-                              password: passwordController.text);
+                              email: provider.emailController.text,
+                              password: provider.passwordController.text);
                         }
                       },
                       child: Consumer<SignInProvider>(
