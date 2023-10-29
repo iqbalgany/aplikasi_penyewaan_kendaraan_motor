@@ -12,6 +12,7 @@ Color kGreenColor = Color(0xff0ec3ae);
 Color kBlueColor = Color.fromARGB(255, 43, 92, 197);
 Color kPinkColor = Color(0xffeb70a5);
 Color kRedColor = Color.fromARGB(255, 180, 19, 19);
+Color kYellowColor = Color.fromARGB(255, 240, 255, 27);
 Color kBackgroundColor = Color(0xfffafafa);
 Color kInactiveColor = Color(0xffdbd7ec);
 Color kTransparentColor = Colors.transparent;
