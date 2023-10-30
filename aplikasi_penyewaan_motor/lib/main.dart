@@ -1,7 +1,8 @@
+import 'package:aplikasi_penyewaan_motor/providers/detail_screen_provider.dart';
 import 'package:aplikasi_penyewaan_motor/providers/home_provider.dart';
 import 'package:aplikasi_penyewaan_motor/providers/sign_in_provider.dart';
-import 'package:aplikasi_penyewaan_motor/views/screens/sign_in_screen.dart';
-import 'package:aplikasi_penyewaan_motor/views/screens/main_screen.dart';
+import 'package:aplikasi_penyewaan_motor/utils/theme.dart';
+import 'package:aplikasi_penyewaan_motor/views/screens/detail_screen.dart';
 import 'package:aplikasi_penyewaan_motor/views/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,16 +23,17 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => HomeProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => DetailScreenProvider(),
         )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        routes: {
-          '/splash-screen': (context) => SplashScreen(),
-          '/sign-in-screen': (context) => LoginScreen(),
-          '/main-screen': (context) => MainScreen(),
-        },
-        home: SplashScreen(),
+        theme: ThemeData(
+          colorSchemeSeed: kBlueColor,
+        ),
+        home: DetailScreen(),
       ),
     );
   }

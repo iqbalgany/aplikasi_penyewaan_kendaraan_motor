@@ -1,6 +1,7 @@
 import 'package:aplikasi_penyewaan_motor/providers/sign_in_provider.dart';
 import 'package:aplikasi_penyewaan_motor/utils/finite_state.dart';
 import 'package:aplikasi_penyewaan_motor/utils/theme.dart';
+import 'package:aplikasi_penyewaan_motor/views/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,7 +33,12 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         );
-        Navigator.pushReplacementNamed(context, '/main-screen');
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MainScreen(),
+          ),
+        );
       }
     });
     super.initState();

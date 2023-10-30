@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:aplikasi_penyewaan_motor/views/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:aplikasi_penyewaan_motor/utils/theme.dart';
 
@@ -16,7 +17,11 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
       Duration(seconds: 3),
       () {
-        Navigator.pushReplacementNamed(context, '/sign-in-screen');
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LoginScreen(),
+            ));
       },
     );
     super.initState();
