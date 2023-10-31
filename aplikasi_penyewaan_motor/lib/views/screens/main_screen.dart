@@ -35,7 +35,7 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: kWhiteColor,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
             label: 'Home',
           ),
           BottomNavigationBarItem(

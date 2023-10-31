@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:aplikasi_penyewaan_motor/models/user_model.dart';
+import 'package:aplikasi_penyewaan_motor/models/sign_in_model.dart';
 import 'package:aplikasi_penyewaan_motor/services/services.dart';
 import 'package:aplikasi_penyewaan_motor/utils/finite_state.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInProvider extends ChangeNotifier {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  TextEditingController fullNameController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 

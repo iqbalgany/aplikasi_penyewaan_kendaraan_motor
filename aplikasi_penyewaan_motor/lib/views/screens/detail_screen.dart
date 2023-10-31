@@ -1,11 +1,18 @@
-import 'package:aplikasi_penyewaan_motor/providers/detail_screen_provider.dart';
+import 'package:aplikasi_penyewaan_motor/models/history_model.dart';
+import 'package:aplikasi_penyewaan_motor/models/motorcycle_model.dart';
+import 'package:aplikasi_penyewaan_motor/providers/motorcycle_controller.dart';
 import 'package:aplikasi_penyewaan_motor/utils/theme.dart';
-import 'package:aplikasi_penyewaan_motor/views/screens/main_screen.dart';
+import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class DetailScreen extends StatefulWidget {
-  const DetailScreen({super.key});
+  final MotorcyleModel motorcycle;
+  DetailScreen({
+    super.key,
+    required this.motorcycle,
+  });
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
@@ -13,13 +20,24 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   @override
+  void initState() {
+    final motorcycleProvider =
+        Provider.of<MotorcycleController>(context, listen: false);
+    motorcycleProvider.refresh();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<DetailScreenProvider>(context, listen: false);
-    return SafeArea(
+    final motorcycleProvider =
+        Provider.of<MotorcycleController>(context, listen: false);
+
+    return ColorfulSafeArea(
+      color: kBlueColor,
       child: Scaffold(
         body: ListView(
           children: [
-            Image.asset('assets/images/yamaha_aerox.png'),
+            Image.asset(widget.motorcycle.image),
             Container(
               padding: EdgeInsets.all(15),
               decoration: BoxDecoration(
@@ -29,7 +47,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Yamaha Aerox 2023',
+                    '${widget.motorcycle.brand} ${widget.motorcycle.name}',
                     style: blackTextStyle.copyWith(
                       fontWeight: semiBold,
                       fontSize: 30,
@@ -49,12 +67,23 @@ class _DetailScreenState extends State<DetailScreen> {
                         width: 10,
                       ),
                       Text(
-                        'Rp60.000 / Day',
+                        NumberFormat.currency(
+                          locale: 'id_ID',
+                          decimalDigits: 0,
+                          symbol: 'Rp',
+                        ).format(widget.motorcycle.price),
                         style: blueTextStyle.copyWith(
                           fontWeight: semiBold,
                           fontSize: 20,
                         ),
                       ),
+                      Text(
+                        ' / Day',
+                        style: blueTextStyle.copyWith(
+                          fontWeight: semiBold,
+                          fontSize: 20,
+                        ),
+                      )
                     ],
                   ),
                 ],
@@ -103,11 +132,11 @@ class _DetailScreenState extends State<DetailScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   InkWell(
-                    onTap: () => provider.selectDate(
-                        context, provider.startDateController, true),
+                    onTap: () => motorcycleProvider.selectDate(
+                        context, motorcycleProvider.startDateController, true),
                     child: AbsorbPointer(
                       child: TextField(
-                        controller: provider.startDateController,
+                        controller: motorcycleProvider.startDateController,
                         decoration: InputDecoration(
                           labelText: 'Pick Up',
                           labelStyle: blueTextStyle,
@@ -127,11 +156,14 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                   SizedBox(height: 20),
                   InkWell(
-                    onTap: () => provider.selectDate(
-                        context, provider.endDateController, false),
+                    onTap: () => motorcycleProvider
+                        .selectDate(context,
+                            motorcycleProvider.endDateController, false)
+                        .then((value) => motorcycleProvider
+                            .payment(widget.motorcycle.price)),
                     child: AbsorbPointer(
                       child: TextField(
-                        controller: provider.endDateController,
+                        controller: motorcycleProvider.endDateController,
                         decoration: InputDecoration(
                           labelText: 'Drop Off',
                           labelStyle: blueTextStyle,
@@ -167,10 +199,14 @@ class _DetailScreenState extends State<DetailScreen> {
                       fontSize: 18,
                     ),
                   ),
-                  Consumer<DetailScreenProvider>(
-                    builder: (context, provider, child) {
+                  Consumer<MotorcycleController>(
+                    builder: (context, motorcycleProvider, child) {
                       return Text(
-                        "Rp${provider.cost.toString()}",
+                        NumberFormat.currency(
+                          locale: 'id_ID',
+                          decimalDigits: 0,
+                          symbol: 'Rp',
+                        ).format(motorcycleProvider.cost),
                         style: blackTextStyle.copyWith(
                           fontWeight: semiBold,
                           fontSize: 18,
@@ -224,13 +260,17 @@ class _DetailScreenState extends State<DetailScreen> {
                 child: TextButton(
                   onPressed: () {
                     /// Done
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MainScreen(),
-                        ));
-                    provider.startDateController.clear();
-                    provider.endDateController.clear();
+                    motorcycleProvider.addHistory(
+                      HistoryModel(
+                          brand: widget.motorcycle.brand,
+                          name: widget.motorcycle.name,
+                          pickUp: motorcycleProvider.startDateController.text,
+                          dropOff: motorcycleProvider.endDateController.text,
+                          totalCost: motorcycleProvider.cost),
+                    );
+                    Navigator.pop(context);
+                    motorcycleProvider.startDateController.clear();
+                    motorcycleProvider.endDateController.clear();
                   },
                   child: Text(
                     'Done',
