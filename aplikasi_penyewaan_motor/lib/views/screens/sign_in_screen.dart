@@ -20,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
     provider.addListener(() {
       if (provider.myState == MyState.failed) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text(
               'Users Doesn\'t exist!',
             ),
@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       } else if (provider.myState == MyState.loaded) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text(
               'Logged In',
             ),
@@ -37,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => MainScreen(),
+            builder: (context) => const MainScreen(),
           ),
         );
       }
@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             /// Title
             Container(
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                 top: 50,
               ),
               child: Text(
@@ -72,10 +72,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
             /// Input Section
             Container(
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                 top: 30,
               ),
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 20,
                 vertical: 30,
               ),
@@ -244,7 +244,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               );
                             }
                           },
-                          child: CircularProgressIndicator(),
+                          child: const CircularProgressIndicator(),
                         ),
                       ),
                     ),

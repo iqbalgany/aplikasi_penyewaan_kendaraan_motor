@@ -25,13 +25,13 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         backgroundColor: kBackgroundColor,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(160),
+          preferredSize: const Size.fromHeight(160),
           child: Container(
             decoration: BoxDecoration(border: Border.all(color: kBlueColor)),
             child: Column(
               children: [
                 Container(
-                  margin: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(
                     horizontal: 24,
                     vertical: 30,
                   ),
@@ -42,13 +42,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Hello, " + signInProvider.usernameController.text,
+                            "Hello, ${signInProvider.usernameController.text}",
                             style: blackTextStyle.copyWith(
                               fontWeight: semiBold,
                               fontSize: 24,
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Text(
                             'What motorbike\ndo you want to rent today?',
                             style: greyTextStyle.copyWith(
@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         decoration: BoxDecoration(
                           border: Border.all(color: kGreyColor),
                           shape: BoxShape.circle,
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             image: AssetImage('assets/images/man_photo.jpg'),
                           ),
                         ),
@@ -94,8 +94,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               },
               child: Container(
-                margin: EdgeInsets.all(7),
-                padding: EdgeInsets.all(5),
+                margin: const EdgeInsets.all(7),
+                padding: const EdgeInsets.all(5),
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.grey.withOpacity(0.3),
                       spreadRadius: 3,
                       blurRadius: 1,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),

@@ -1,6 +1,7 @@
 import 'package:aplikasi_penyewaan_motor/utils/theme.dart';
 import 'package:aplikasi_penyewaan_motor/views/screens/history_screen.dart';
 import 'package:aplikasi_penyewaan_motor/views/screens/home_screen.dart';
+import 'package:aplikasi_penyewaan_motor/views/screens/recommendation_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -16,6 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> pages = <Widget>[
     const HomeScreen(),
     const HistoryScreen(),
+    const RecommendationScreen(),
   ];
 
   @override
@@ -33,7 +35,7 @@ class _MainScreenState extends State<MainScreen> {
         selectedItemColor: kBlueColor,
         unselectedItemColor: kBlackColor,
         backgroundColor: kWhiteColor,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
             label: 'Home',
@@ -41,6 +43,10 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.history_rounded),
             label: 'History',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.motorcycle_outlined),
+            label: 'Recommendation',
           ),
         ],
       ),

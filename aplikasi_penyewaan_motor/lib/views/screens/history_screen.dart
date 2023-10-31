@@ -17,7 +17,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
-        title: Text('History Screen'),
+        title: const Text('History Screen'),
+        titleTextStyle: whiteTextStyle.copyWith(
+          fontSize: 20,
+          fontWeight: semiBold,
+        ),
         centerTitle: true,
       ),
       body: Consumer<MotorcycleController>(
@@ -37,11 +41,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         color: Colors.grey.withOpacity(0.3),
                         spreadRadius: 5,
                         blurRadius: 6,
-                        offset: Offset(0, 3),
+                        offset: const Offset(0, 3),
                       ),
                     ]),
-                margin: EdgeInsets.all(15),
-                padding: EdgeInsets.all(10),
+                margin: const EdgeInsets.all(15),
+                padding: const EdgeInsets.all(10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

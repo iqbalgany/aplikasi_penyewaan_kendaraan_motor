@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 
 class DetailScreen extends StatefulWidget {
   final MotorcyleModel motorcycle;
-  DetailScreen({
+  const DetailScreen({
     super.key,
     required this.motorcycle,
   });
@@ -29,6 +29,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    GlobalKey<FormState> formKey = GlobalKey<FormState>();
     final motorcycleProvider =
         Provider.of<MotorcycleController>(context, listen: false);
 
@@ -39,7 +40,7 @@ class _DetailScreenState extends State<DetailScreen> {
           children: [
             Image.asset(widget.motorcycle.image),
             Container(
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 border: Border.all(color: kGreyColor),
               ),
@@ -63,7 +64,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           fontSize: 15,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Text(
@@ -90,7 +91,7 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 border: Border.all(color: kGreyColor),
               ),
@@ -99,8 +100,8 @@ class _DetailScreenState extends State<DetailScreen> {
                 children: [
                   Row(
                     children: [
-                      CircleAvatar(child: Text('I')),
-                      SizedBox(
+                      const CircleAvatar(child: Text('I')),
+                      const SizedBox(
                         width: 10,
                       ),
                       Column(
@@ -124,68 +125,75 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 border: Border.all(color: kGreyColor),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  InkWell(
-                    onTap: () => motorcycleProvider.selectDate(
-                        context, motorcycleProvider.startDateController, true),
-                    child: AbsorbPointer(
-                      child: TextField(
-                        controller: motorcycleProvider.startDateController,
-                        decoration: InputDecoration(
-                          labelText: 'Pick Up',
-                          labelStyle: blueTextStyle,
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: kBlueColor,
+              child: Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    InkWell(
+                      onTap: () => motorcycleProvider.selectDate(context,
+                          motorcycleProvider.startDateController, true),
+                      child: AbsorbPointer(
+                        child: TextFormField(
+                          controller: motorcycleProvider.startDateController,
+                          validator: (value) =>
+                              value!.isEmpty ? 'Required' : null,
+                          decoration: InputDecoration(
+                            labelText: 'Pick Up',
+                            labelStyle: blueTextStyle,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: kBlueColor,
+                              ),
                             ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: kBlueColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  InkWell(
-                    onTap: () => motorcycleProvider
-                        .selectDate(context,
-                            motorcycleProvider.endDateController, false)
-                        .then((value) => motorcycleProvider
-                            .payment(widget.motorcycle.price)),
-                    child: AbsorbPointer(
-                      child: TextField(
-                        controller: motorcycleProvider.endDateController,
-                        decoration: InputDecoration(
-                          labelText: 'Drop Off',
-                          labelStyle: blueTextStyle,
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: kBlueColor,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: kBlueColor,
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: kBlueColor,
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 20),
+                    InkWell(
+                      onTap: () => motorcycleProvider
+                          .selectDate(context,
+                              motorcycleProvider.endDateController, false)
+                          .then((value) => motorcycleProvider
+                              .payment(widget.motorcycle.price)),
+                      child: AbsorbPointer(
+                        child: TextFormField(
+                          controller: motorcycleProvider.endDateController,
+                          validator: (value) =>
+                              value!.isEmpty ? 'Required' : null,
+                          decoration: InputDecoration(
+                            labelText: 'Drop Off',
+                            labelStyle: blueTextStyle,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: kBlueColor,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: kBlueColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Container(
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 border: Border.all(color: kGreyColor),
               ),
@@ -226,7 +234,7 @@ class _DetailScreenState extends State<DetailScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
-                margin: EdgeInsets.symmetric(
+                margin: const EdgeInsets.symmetric(
                   vertical: 10,
                 ),
                 height: 50,
@@ -248,7 +256,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(
+                margin: const EdgeInsets.symmetric(
                   vertical: 10,
                 ),
                 height: 50,
@@ -260,14 +268,16 @@ class _DetailScreenState extends State<DetailScreen> {
                 child: TextButton(
                   onPressed: () {
                     /// Done
-                    motorcycleProvider.addHistory(
-                      HistoryModel(
-                          brand: widget.motorcycle.brand,
-                          name: widget.motorcycle.name,
-                          pickUp: motorcycleProvider.startDateController.text,
-                          dropOff: motorcycleProvider.endDateController.text,
-                          totalCost: motorcycleProvider.cost),
-                    );
+                    if (formKey.currentState!.validate()) {
+                      motorcycleProvider.addHistory(
+                        HistoryModel(
+                            brand: widget.motorcycle.brand,
+                            name: widget.motorcycle.name,
+                            pickUp: motorcycleProvider.startDateController.text,
+                            dropOff: motorcycleProvider.endDateController.text,
+                            totalCost: motorcycleProvider.cost),
+                      );
+                    }
                     Navigator.pop(context);
                     motorcycleProvider.startDateController.clear();
                     motorcycleProvider.endDateController.clear();

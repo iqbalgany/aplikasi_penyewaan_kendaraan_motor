@@ -15,12 +15,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(
-      Duration(seconds: 3),
+      const Duration(seconds: 3),
       () {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => LoginScreen(),
+              builder: (context) => const LoginScreen(),
             ));
       },
     );
@@ -38,8 +38,8 @@ class _SplashScreenState extends State<SplashScreen> {
             Container(
               width: 150,
               height: 150,
-              margin: EdgeInsets.only(bottom: 10),
-              decoration: BoxDecoration(
+              margin: const EdgeInsets.only(bottom: 10),
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/motorcycle_icon.png'),
                 ),
