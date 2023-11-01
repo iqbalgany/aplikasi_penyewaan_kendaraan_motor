@@ -27,15 +27,15 @@ class PredictionController extends ChangeNotifier {
   );
 
   Future<void> getRecommendation({
-    required int averagePrice,
+    required int budget,
     required String day,
   }) async {
     try {
-      final averageRentalPrice = currency.format(averagePrice);
+      final motorBudget = currency.format(budget);
       notifyListeners();
 
       String promptData =
-          'You are someone who understands motorbike rental. Please recommend me a motorbike that is frequently used for rental within $day days and the average price $averageRentalPrice, in list form';
+          'You are someone who understands motorbike rental. Please recommend me a rental motorbike along with the year of production with a budget of $motorBudget for rental in $day days, in list form';
       notifyListeners();
 
       gptData = await service.getRecommendation(

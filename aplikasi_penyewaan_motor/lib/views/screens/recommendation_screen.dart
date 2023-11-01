@@ -17,7 +17,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
         Provider.of<PredictionController>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Motorbike Rental Recommendations'),
+        title: const Text('Recommendations'),
         titleTextStyle: whiteTextStyle.copyWith(
           fontSize: 20,
           fontWeight: semiBold,
@@ -44,6 +44,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                               fontWeight: semiBold,
                               fontSize: 16,
                             ),
+                            textAlign: TextAlign.center,
                           ),
                         ),
 
@@ -56,8 +57,22 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                           child: TextFormField(
                             keyboardType: TextInputType.number,
                             controller: recommendationProvider.dayController,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
+                              labelText: 'Day',
+                              labelStyle: greyTextStyle.copyWith(
+                                fontWeight: semiBold,
+                              ),
                               hintText: 'Enter a day',
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: kBlueColor,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: kBlueColor,
+                                ),
+                              ),
                             ),
                             validator: (String? value) {
                               bool isInvalid = value == null ||
@@ -87,8 +102,22 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                               recommendationProvider.currencyFormatter
                             ],
                             controller: recommendationProvider.priceController,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
+                              labelText: 'Budget',
+                              labelStyle: greyTextStyle.copyWith(
+                                fontWeight: semiBold,
+                              ),
                               hintText: 'Enter a budget (in IDR)',
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: kBlueColor,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: kBlueColor,
+                                ),
+                              ),
                             ),
                             validator: (value) =>
                                 value!.isEmpty ? 'Required' : null,
@@ -105,7 +134,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                                 recommendationProvider.getRecommendation(
                                   day:
                                       recommendationProvider.dayController.text,
-                                  averagePrice: recommendationProvider
+                                  budget: recommendationProvider
                                       .currencyFormatter
                                       .getUnformattedValue()
                                       .toInt(),
@@ -114,7 +143,12 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                                 recommendationProvider.priceController.clear();
                               }
                             },
-                            child: const Text('Get Recommendation'),
+                            child: Text(
+                              'Get Recommendation',
+                              style: whiteTextStyle.copyWith(
+                                fontWeight: semiBold,
+                              ),
+                            ),
                           ),
                         ),
                       ],
@@ -124,31 +158,27 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                   /// Result
                   Consumer<PredictionController>(
                     builder: (context, recommendationProvider, child) {
-                      if (recommendationProvider.gptData != null) {
-                        return Container(
-                          padding: const EdgeInsets.only(
-                            bottom: 15,
-                            left: 15,
-                            right: 15,
+                      return Container(
+                        padding: const EdgeInsets.only(
+                          bottom: 15,
+                          left: 15,
+                          right: 15,
+                        ),
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: kBlueColor,
                           ),
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                              color: kBlueColor,
+                        ),
+                        child: Text(
+                            recommendationProvider.gptData?.choices[0].text ??
+                                '',
+                            style: blackTextStyle.copyWith(
+                              fontWeight: semiBold,
                             ),
-                          ),
-                          child: Text(
-                              recommendationProvider.gptData?.choices[0].text ??
-                                  '',
-                              style: blackTextStyle.copyWith(
-                                fontWeight: semiBold,
-                              ),
-                              textAlign: TextAlign.justify),
-                        );
-                      } else {
-                        return const Icon(Icons.flutter_dash);
-                      }
+                            textAlign: TextAlign.justify),
+                      );
                     },
                   )
                 ],
