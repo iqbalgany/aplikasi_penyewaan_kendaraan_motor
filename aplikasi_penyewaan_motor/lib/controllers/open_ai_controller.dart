@@ -31,13 +31,16 @@ class PredictionController extends ChangeNotifier {
     required String day,
   }) async {
     try {
+      /// Mengonversi ke bentuk mata uang yang diformat
       final motorBudget = currency.format(budget);
       notifyListeners();
 
+      /// Membuat prompt teks yang akan digunakan untuk meminta rekomendasi.
       String promptData =
           'You are someone who understands motorbike rental. Please recommend me a rental motorbike along with the year of production with a budget of $motorBudget for rental in $day days, in list form';
       notifyListeners();
 
+      /// Memanggil metode getRecommendation dari objek service, meneruskan promptData sebagai parameter. Hasilnya disimpan dalam variabel gptData.
       gptData = await service.getRecommendation(
         promptData: promptData,
       );

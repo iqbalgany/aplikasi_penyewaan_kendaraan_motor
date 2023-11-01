@@ -6,9 +6,10 @@ class MotorcycleController extends ChangeNotifier {
   final TextEditingController startDateController = TextEditingController();
   final TextEditingController endDateController = TextEditingController();
   int cost = 0;
-  int _days = 0;
+  int days = 0;
 
-  List<MotorcyleModel> motorcycle = [
+  final List<MotorcyleModel> motorcycle = [
+    /// Membuat objek-objek
     MotorcyleModel(
         image: 'assets/images/yamaha_aerox.png',
         brand: 'Yamaha',
@@ -85,29 +86,34 @@ class MotorcycleController extends ChangeNotifier {
       lastDate: DateTime(2025),
     );
 
+    /// Memeriksa apakah pengguna telah memilih tanggal
     if (pickedDate != null) {
+      /// Mengatur nilai teks pada controller dengan format tanggal yang diinginkan
       controller.text = DateFormat('EEEE, dd MMMM yyyy').format(pickedDate);
 
-      // Calculate cost based on selected dates
+      /// Menghitung biaya berdasarkan tanggal yang dipilih
       if (startDateController.text.isNotEmpty &&
           endDateController.text.isNotEmpty) {
+        /// Mengonversi teks tanggal ke objek DateTime
         DateTime startDate =
             DateFormat('EEEE, dd MMMM yyyy').parse(startDateController.text);
         DateTime endDate =
             DateFormat('EEEE, dd MMMM yyyy').parse(endDateController.text);
 
-        // Calculate number of days between two dates
-        _days = endDate.difference(startDate).inDays;
+        /// Menghitung jumlah hari antara dua tanggal
+        days = endDate.difference(startDate).inDays;
 
         notifyListeners();
       }
     }
   }
 
+  /// menghitung biaya total berdasarkan durasi penggunaan
   void payment(int price) {
-    cost = _days * price;
+    cost = days * price;
   }
 
+  /// mengatur ulang nilai biaya ke 0
   void refresh() {
     cost = 0;
   }

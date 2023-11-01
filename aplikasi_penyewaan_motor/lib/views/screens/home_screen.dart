@@ -1,5 +1,5 @@
-import 'package:aplikasi_penyewaan_motor/providers/motorcycle_controller.dart';
-import 'package:aplikasi_penyewaan_motor/providers/sign_in_controller.dart';
+import 'package:aplikasi_penyewaan_motor/controllers/motorcycle_controller.dart';
+import 'package:aplikasi_penyewaan_motor/controllers/sign_in_controller.dart';
 import 'package:aplikasi_penyewaan_motor/utils/theme.dart';
 import 'package:aplikasi_penyewaan_motor/views/screens/detail_screen.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final motorcycleProvider =
         Provider.of<MotorcycleController>(context, listen: false);
-    final signInProvider = Provider.of<SignInProvider>(context, listen: false);
+    final signInProvider =
+        Provider.of<SignInController>(context, listen: false);
     return ColorfulSafeArea(
       color: kBlueColor,
       child: Scaffold(

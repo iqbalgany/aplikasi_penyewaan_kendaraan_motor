@@ -1,4 +1,4 @@
-import 'package:aplikasi_penyewaan_motor/providers/sign_in_controller.dart';
+import 'package:aplikasi_penyewaan_motor/controllers/sign_in_controller.dart';
 import 'package:aplikasi_penyewaan_motor/utils/finite_state.dart';
 import 'package:aplikasi_penyewaan_motor/utils/theme.dart';
 import 'package:aplikasi_penyewaan_motor/views/screens/main_screen.dart';
@@ -16,7 +16,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
-    final provider = Provider.of<SignInProvider>(context, listen: false);
+    final provider = Provider.of<SignInController>(context, listen: false);
     provider.addListener(() {
       if (provider.myState == MyState.failed) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<SignInProvider>(context, listen: false);
+    final provider = Provider.of<SignInController>(context, listen: false);
     return ColorfulSafeArea(
       color: kBlueColor,
       child: Scaffold(
@@ -229,7 +229,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 password: provider.passwordController.text);
                           }
                         },
-                        child: Consumer<SignInProvider>(
+                        child: Consumer<SignInController>(
                           builder:
                               (context, provider, circularProgressIndicator) {
                             if (provider.myState == MyState.loading) {
