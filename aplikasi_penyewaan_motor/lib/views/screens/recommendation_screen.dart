@@ -1,4 +1,4 @@
-import 'package:aplikasi_penyewaan_motor/providers/open_ai_controller.dart';
+import 'package:aplikasi_penyewaan_motor/controllers/open_ai_controller.dart';
 import 'package:aplikasi_penyewaan_motor/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

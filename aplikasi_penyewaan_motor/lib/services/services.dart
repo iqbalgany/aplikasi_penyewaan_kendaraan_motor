@@ -10,6 +10,7 @@ class ApiService {
     required String password,
   }) async {
     try {
+      /// membuat permintaan HTTP POST menggunakan pustaka Dio untuk mengirim data email dan password ke URL yang ditentukan
       Response response = await _dio.post(
         Urls.baseUrl + Urls.login,
         data: {
@@ -18,6 +19,7 @@ class ApiService {
         },
       );
 
+      ///  mengubah data JSON respons ke objek Dart yang dapat digunakan dalam aplikasi.
       return SignInModel.fromJson(response.data);
     } catch (e) {
       rethrow;

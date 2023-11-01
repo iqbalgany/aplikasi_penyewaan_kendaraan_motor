@@ -1,7 +1,7 @@
 import 'package:aplikasi_penyewaan_motor/models/history_model.dart';
 import 'package:aplikasi_penyewaan_motor/models/motorcycle_model.dart';
-import 'package:aplikasi_penyewaan_motor/providers/history_controller.dart';
-import 'package:aplikasi_penyewaan_motor/providers/motorcycle_controller.dart';
+import 'package:aplikasi_penyewaan_motor/controllers/history_controller.dart';
+import 'package:aplikasi_penyewaan_motor/controllers/motorcycle_controller.dart';
 import 'package:aplikasi_penyewaan_motor/utils/theme.dart';
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
