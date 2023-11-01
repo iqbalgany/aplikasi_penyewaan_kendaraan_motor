@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:aplikasi_penyewaan_motor/views/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:aplikasi_penyewaan_motor/utils/theme.dart';
 
@@ -14,9 +15,13 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(
-      Duration(seconds: 3),
+      const Duration(seconds: 3),
       () {
-        Navigator.pushReplacementNamed(context, '/login-screen');
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const LoginScreen(),
+            ));
       },
     );
     super.initState();
@@ -33,8 +38,8 @@ class _SplashScreenState extends State<SplashScreen> {
             Container(
               width: 150,
               height: 150,
-              margin: EdgeInsets.only(bottom: 10),
-              decoration: BoxDecoration(
+              margin: const EdgeInsets.only(bottom: 10),
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/motorcycle_icon.png'),
                 ),
