@@ -1,5 +1,6 @@
 import 'package:aplikasi_penyewaan_motor/models/history_model.dart';
 import 'package:aplikasi_penyewaan_motor/models/motorcycle_model.dart';
+import 'package:aplikasi_penyewaan_motor/providers/history_controller.dart';
 import 'package:aplikasi_penyewaan_motor/providers/motorcycle_controller.dart';
 import 'package:aplikasi_penyewaan_motor/utils/theme.dart';
 import 'package:colorful_safe_area/colorful_safe_area.dart';
@@ -32,7 +33,8 @@ class _DetailScreenState extends State<DetailScreen> {
     GlobalKey<FormState> formKey = GlobalKey<FormState>();
     final motorcycleProvider =
         Provider.of<MotorcycleController>(context, listen: false);
-
+    final historyProvider =
+        Provider.of<HistoryController>(context, listen: false);
     return ColorfulSafeArea(
       color: kBlueColor,
       child: Scaffold(
@@ -269,7 +271,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   onPressed: () {
                     /// Done
                     if (formKey.currentState!.validate()) {
-                      motorcycleProvider.addHistory(
+                      historyProvider.addHistory(
                         HistoryModel(
                             brand: widget.motorcycle.brand,
                             name: widget.motorcycle.name,

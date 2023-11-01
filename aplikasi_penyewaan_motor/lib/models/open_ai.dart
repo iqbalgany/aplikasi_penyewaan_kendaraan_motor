@@ -1,9 +1,3 @@
-import 'dart:convert';
-
-GptData gptDataFromJson(String str) => GptData.fromJson(json.decode(str));
-
-String gptDataToJson(GptData data) => json.encode(data.toJson());
-
 class GptData {
   final String warning;
   final String id;

@@ -9,8 +9,6 @@ class MotorcycleController extends ChangeNotifier {
   int cost = 0;
   int _days = 0;
 
-  List<HistoryModel> listHistory = [];
-
   List<MotorcyleModel> motorcycle = [
     MotorcyleModel(
         image: 'assets/images/yamaha_aerox.png',
@@ -113,10 +111,5 @@ class MotorcycleController extends ChangeNotifier {
 
   void refresh() {
     cost = 0;
-  }
-
-  void addHistory(HistoryModel historyModel) {
-    listHistory.add(historyModel);
-    notifyListeners();
   }
 }

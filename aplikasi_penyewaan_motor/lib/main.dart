@@ -1,3 +1,4 @@
+import 'package:aplikasi_penyewaan_motor/providers/history_controller.dart';
 import 'package:aplikasi_penyewaan_motor/providers/motorcycle_controller.dart';
 import 'package:aplikasi_penyewaan_motor/providers/open_ai_controller.dart';
 import 'package:aplikasi_penyewaan_motor/providers/sign_in_controller.dart';
@@ -25,7 +26,10 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => PredictionController(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) => HistoryController(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

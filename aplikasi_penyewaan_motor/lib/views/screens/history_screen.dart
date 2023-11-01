@@ -1,3 +1,4 @@
+import 'package:aplikasi_penyewaan_motor/providers/history_controller.dart';
 import 'package:aplikasi_penyewaan_motor/providers/motorcycle_controller.dart';
 import 'package:aplikasi_penyewaan_motor/utils/theme.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
         ),
         centerTitle: true,
       ),
-      body: Consumer<MotorcycleController>(
+      body: Consumer<HistoryController>(
         builder: (context, historyProvider, child) {
           if (historyProvider.listHistory.isEmpty) {
             return Center(
