@@ -3,6 +3,7 @@ import 'package:aplikasi_penyewaan_motor/models/motorcycle_model.dart';
 import 'package:aplikasi_penyewaan_motor/controllers/history_controller.dart';
 import 'package:aplikasi_penyewaan_motor/controllers/motorcycle_controller.dart';
 import 'package:aplikasi_penyewaan_motor/utils/theme.dart';
+import 'package:aplikasi_penyewaan_motor/views/screens/main_screen.dart';
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -268,22 +269,81 @@ class _DetailScreenState extends State<DetailScreen> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextButton(
-                  onPressed: () {
-                    /// Done
-                    if (formKey.currentState!.validate()) {
-                      historyProvider.addHistory(
-                        HistoryModel(
-                            brand: widget.motorcycle.brand,
-                            name: widget.motorcycle.name,
-                            pickUp: motorcycleProvider.startDateController.text,
-                            dropOff: motorcycleProvider.endDateController.text,
-                            totalCost: motorcycleProvider.cost),
-                      );
-                    }
-                    Navigator.pop(context);
-                    motorcycleProvider.startDateController.clear();
-                    motorcycleProvider.endDateController.clear();
-                  },
+                  onPressed: () => showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      title: const Text(
+                        'AlertDialog',
+                      ),
+                      titleTextStyle: blackTextStyle.copyWith(
+                        fontWeight: bold,
+                        fontSize: 20,
+                      ),
+                      content: Text(
+                        'Are you sure about your choice?',
+                        style: blackTextStyle.copyWith(
+                          fontWeight: semiBold,
+                          fontSize: 14,
+                        ),
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, 'Cancel'),
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: kBlueColor,
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(20),
+                              color: kBlueColor,
+                            ),
+                            child: Text('CANCEL', style: whiteTextStyle),
+                          ),
+                        ),
+                        TextButton(
+                          /// Done
+                          onPressed: () {
+                            if (formKey.currentState!.validate()) {
+                              historyProvider.addHistory(
+                                HistoryModel(
+                                    brand: widget.motorcycle.brand,
+                                    name: widget.motorcycle.name,
+                                    pickUp: motorcycleProvider
+                                        .startDateController.text,
+                                    dropOff: motorcycleProvider
+                                        .endDateController.text,
+                                    totalCost: motorcycleProvider.cost),
+                              );
+                            }
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MainScreen(),
+                              ),
+                            );
+                            motorcycleProvider.startDateController.clear();
+                            motorcycleProvider.endDateController.clear();
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: kBlueColor,
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              'ACCEPT',
+                              style: blueTextStyle,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   child: Text(
                     'Done',
                     style: blackTextStyle.copyWith(

@@ -17,6 +17,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text('History'),
         titleTextStyle: whiteTextStyle.copyWith(
           fontSize: 20,
