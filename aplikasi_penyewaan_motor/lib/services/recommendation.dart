@@ -9,6 +9,7 @@ class RecommendationService {
   Future<GptData> getRecommendation({
     required String promptData,
   }) async {
+    /// Membuat objek
     late GptData gptData = GptData(
       warning: '',
       id: "",

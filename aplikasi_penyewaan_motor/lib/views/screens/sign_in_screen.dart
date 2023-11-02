@@ -201,7 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             validator: (String? value) {
                               if (value!.isEmpty) {
-                                return 'Please, fill full name field!';
+                                return 'Please, fill password field!';
                               } else {
                                 return null;
                               }
@@ -253,10 +253,35 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
 
+            /// Signup Button
+            Container(
+              margin: EdgeInsets.only(
+                top: 20,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Dont have account?',
+                    style: blackTextStyle.copyWith(
+                      fontWeight: semiBold,
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    'Sign Up',
+                    style: blueTextStyle.copyWith(
+                      fontWeight: semiBold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
             /// Terms and Conditions
             Padding(
               padding: const EdgeInsets.only(
-                top: 50,
+                top: 30,
                 bottom: 75,
               ),
               child: Container(

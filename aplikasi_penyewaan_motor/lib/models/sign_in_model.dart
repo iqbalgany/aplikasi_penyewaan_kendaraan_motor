@@ -1,10 +1,3 @@
-import 'dart:convert';
-
-SignInModel signInModelFromJson(String str) =>
-    SignInModel.fromJson(json.decode(str));
-
-String signInModelToJson(SignInModel data) => json.encode(data.toJson());
-
 class SignInModel {
   String? email;
   String? password;
