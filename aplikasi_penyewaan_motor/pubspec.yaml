@@ -42,7 +42,6 @@ dependencies:
   intl: ^0.18.1
   colorful_safe_area: ^1.0.0
   envied: ^0.3.0+3
-  http: ^1.1.0
   currency_text_input_formatter: ^2.1.10
 
 dev_dependencies:

@@ -95,9 +95,10 @@ class MotorcycleController extends ChangeNotifier {
       if (startDateController.text.isNotEmpty &&
           endDateController.text.isNotEmpty) {
         /// Mengonversi teks tanggal ke objek DateTime
-        DateTime startDate =
+        /// Penambahan final (PERBAIKAN)
+        final DateTime startDate =
             DateFormat('EEEE, dd MMMM yyyy').parse(startDateController.text);
-        DateTime endDate =
+        final DateTime endDate =
             DateFormat('EEEE, dd MMMM yyyy').parse(endDateController.text);
 
         /// Menghitung jumlah hari antara dua tanggal
